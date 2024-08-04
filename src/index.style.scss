@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+:root {
+	--dark-1: #010101;
+	--dark-2: #16161e;
+
+	--gray-1: #1f2130;
+	--gray-2: #232534;
+	--gray-3: #2a2f42;
+
+	--light-1: #838290;
+	--light-2: #b1b4d9;
+
+	--blue-1: #232e6c;
+	--blue-2: #1b4196;
+	--blue-3: #7284fe;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--dark-2);
+	width: 100vw;
+	height: 100vh;
+}
+
+.app {
+	padding: 8px;
+}
+
+.wrapper {
+	padding: 4px;
+	background: var(--dark-1);
+	border: 1px solid var(--gray-3);
+}
+
+.sudoku_grid {
+	display: grid;
+	grid-template-columns: repeat(3, 40px * 3 + 2px * 2);
+	grid-template-rows: repeat(3, 40px * 3 + 2px * 2);
+	gap: 4px;
+	&_wrapper {
+		position: relative;
+	}
+	&_largeCell {
+		display: grid;
+		grid-template-columns: repeat(3, 40px);
+		grid-template-rows: repeat(3, 40px);
+		gap: 2px;
+	}
+	&_smallCell {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--gray-2);
+		font-size: 28px;
+		line-height: 28px;
+		color: var(--light-2);
+		user-select: none;
+		cursor: pointer;
+	}
+	&_areas {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		svg {
+			position: absolute;
+		}
+	}
+	&_singleArea {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		&_sum {
+			position: absolute;
+			display: flex;
+			justify-content: flex-start;
+			width: 16px;
+			padding: 0 2px;
+			//background: black;
+			font-size: 10px;
+			line-height: 10px;
+			color: var(--light-1);
+		}
+	}
+}
+
+/* Reset and base styles  */
+* {
+	font-family: 'Lato', sans-serif;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Links */
+
+a,
+a:link,
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+/* Common */
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+	display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+ul,
+ul li {
+	list-style: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+img,
+svg {
+	max-width: 100%;
+	height: auto;
+}
+
+address {
+	font-style: normal;
+}
+
+/* Form */
+
+input,
+textarea,
+button,
+select {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+button,
+input[type='submit'] {
+	display: inline-block;
+	box-shadow: none;
+	background-color: transparent;
+	background: none;
+	cursor: pointer;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active {
+	outline: none;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+label {
+	cursor: pointer;
+}
+
+legend {
+	display: block;
+}
