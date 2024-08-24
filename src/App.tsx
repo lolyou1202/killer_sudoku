@@ -4,6 +4,7 @@ import {
 } from './constants'
 import { useArrayIncludes } from './hooks/useArrayIncludes'
 import { useFindPixelsByCoordinates } from './hooks/useFindPixelsByCoordinates'
+import { useFindPointInDirection } from './hooks/useFindPointInDirection'
 import { useSplitToSections } from './hooks/useSplitToSections'
 import { generateKillerSudoku } from 'killer-sudoku-generator'
 
@@ -13,12 +14,12 @@ function App() {
 	const { puzzle, solution, areas, difficulty } = sudoku
 	console.log(sudoku)
 
-	const splitNumbers = useSplitToSections(solution, 'sections')
+	const splitNumbers = useSplitToSections(puzzle, 'sections')
 
 	const getPointsWithRelative = (ariaCells: number[][]) => {
 		const pointsList: {
-			xy: number[]
-			relative: { [key in 'top' | 'right' | 'bottom' | 'left']?: boolean }
+			xy: [number, number]
+			relative: { [key in 'top' | 'right' | 'bottom' | 'left']: boolean }
 		}[] = []
 
 		for (let i = 0; i < ariaCells.length; i++) {
@@ -47,8 +48,10 @@ function App() {
 				pointsList.push({
 					xy: [x_pixels, y_pixels],
 					relative: {
-						right: true,
+						top: false,
 						bottom: true,
+						left: false,
+						right: true,
 					},
 				})
 			}
@@ -67,7 +70,9 @@ function App() {
 					xy: [x_pixels, y_pixels],
 					relative: {
 						top: true,
+						bottom: false,
 						left: true,
+						right: false,
 					},
 				})
 			}
@@ -86,6 +91,8 @@ function App() {
 					xy: [x_pixels, y_pixels],
 					relative: {
 						top: true,
+						bottom: false,
+						left: false,
 						right: true,
 					},
 				})
@@ -104,8 +111,10 @@ function App() {
 				pointsList.push({
 					xy: [x_pixels, y_pixels],
 					relative: {
+						top: false,
 						bottom: true,
 						left: true,
+						right: false,
 					},
 				})
 			}
@@ -124,7 +133,9 @@ function App() {
 					xy: [x_pixels, y_pixels],
 					relative: {
 						top: true,
+						bottom: false,
 						left: true,
+						right: false,
 					},
 				})
 			}
@@ -142,7 +153,9 @@ function App() {
 				pointsList.push({
 					xy: [x_pixels, y_pixels],
 					relative: {
+						top: false,
 						bottom: true,
+						left: false,
 						right: true,
 					},
 				})
@@ -161,8 +174,10 @@ function App() {
 				pointsList.push({
 					xy: [x_pixels, y_pixels],
 					relative: {
+						top: false,
 						bottom: true,
 						left: true,
+						right: false,
 					},
 				})
 			}
@@ -181,6 +196,8 @@ function App() {
 					xy: [x_pixels, y_pixels],
 					relative: {
 						top: true,
+						bottom: false,
+						left: false,
 						right: true,
 					},
 				})
@@ -192,15 +209,19 @@ function App() {
 
 	const getPointsWithSequence = (
 		pointsList: {
-			xy: number[]
-			relative: { [key in 'top' | 'right' | 'bottom' | 'left']?: boolean }
+			xy: [number, number]
+			relative: { [key in 'top' | 'right' | 'bottom' | 'left']: boolean }
 		}[]
 	) => {
 		pointsList.sort((a, b) => {
-			if (a.xy[1] !== b.xy[1]) {
-				return a.xy[1] - b.xy[1]
+			const [x_point_a, y_point_a] = a.xy
+			const [x_point_b, y_point_b] = b.xy
+
+			if (y_point_a !== y_point_b) {
+				return y_point_a - y_point_b
 			}
-			return a.xy[0] - b.xy[0]
+
+			return x_point_a - x_point_b
 		})
 
 		const newPointList: number[][] = []
@@ -208,94 +229,54 @@ function App() {
 
 		newPointList.push(currentPoint.xy)
 
-		for (let i = 0; i < pointsList.length; i++) {
+		pointsList.forEach(() => {
 			if (currentPoint.relative.right) {
-				const arr = pointsList.filter(
-					point =>
-						point.xy[0] > currentPoint.xy[0] &&
-						point.xy[1] === currentPoint.xy[1]
+				const item = useFindPointInDirection(
+					pointsList,
+					currentPoint.xy,
+					'right'
 				)
-				const indexOfMax = arr.reduce((maxIndex, item, index) => {
-					if (item.xy[0] < arr[maxIndex].xy[0]) {
-						return index
-					}
-					return maxIndex
-				}, 0)
-				newPointList.push(arr[indexOfMax].xy)
+				newPointList.push(item.xy)
 
-				const indexRelative = currentPoint.relative.indexOf('right')
-				currentPoint.relative.splice(indexRelative, 1)
-
-				currentPoint = arr[indexOfMax]
-				const indexNewRelative = currentPoint.relative.indexOf('left')
-				currentPoint.relative.splice(indexNewRelative, 1)
-			} else if (currentPoint.relative.includes('bottom')) {
-				const arr = pointsList.filter(
-					point =>
-						point.xy[1] > currentPoint.xy[1] &&
-						point.xy[0] === currentPoint.xy[0]
+				currentPoint.relative.right = false
+				currentPoint = item
+				currentPoint.relative.left = false
+			} else if (currentPoint.relative.bottom) {
+				const item = useFindPointInDirection(
+					pointsList,
+					currentPoint.xy,
+					'bottom'
 				)
-				const indexOfMax = arr.reduce((maxIndex, item, index) => {
-					if (item.xy[1] < arr[maxIndex].xy[1]) {
-						return index
-					}
-					return maxIndex
-				}, 0)
-				newPointList.push(arr[indexOfMax].xy)
+				newPointList.push(item.xy)
 
-				const indexRelative = currentPoint.relative.indexOf('bottom')
-				currentPoint.relative.splice(indexRelative, 1)
-
-				currentPoint = arr[indexOfMax]
-				const indexNewRelative = currentPoint.relative.indexOf('top')
-				currentPoint.relative.splice(indexNewRelative, 1)
-			} else if (currentPoint.relative.includes('left')) {
-				const arr = pointsList.filter(
-					point =>
-						point.xy[0] < currentPoint.xy[0] &&
-						point.xy[1] === currentPoint.xy[1]
+				currentPoint.relative.bottom = false
+				currentPoint = item
+				currentPoint.relative.top = false
+			} else if (currentPoint.relative.left) {
+				const item = useFindPointInDirection(
+					pointsList,
+					currentPoint.xy,
+					'left'
 				)
-				const indexOfMax = arr.reduce((maxIndex, item, index) => {
-					if (item.xy[0] > arr[maxIndex].xy[0]) {
-						return index
-					}
-					return maxIndex
-				}, 0)
-				newPointList.push(arr[indexOfMax].xy)
+				newPointList.push(item.xy)
 
-				const indexRelative = currentPoint.relative.indexOf('left')
-				currentPoint.relative.splice(indexRelative, 1)
-
-				currentPoint = arr[indexOfMax]
-				const indexNewRelative = currentPoint.relative.indexOf('right')
-				currentPoint.relative.splice(indexNewRelative, 1)
-			} else if (currentPoint.relative.includes('top')) {
-				const arr = pointsList.filter(
-					point =>
-						point.xy[1] < currentPoint.xy[1] &&
-						point.xy[0] === currentPoint.xy[0]
+				currentPoint.relative.left = false
+				currentPoint = item
+				currentPoint.relative.right = false
+			} else if (currentPoint.relative.top) {
+				const item = useFindPointInDirection(
+					pointsList,
+					currentPoint.xy,
+					'top'
 				)
-				const indexOfMax = arr.reduce((maxIndex, item, index) => {
-					if (item.xy[1] > arr[maxIndex].xy[1]) {
-						return index
-					}
-					return maxIndex
-				}, 0)
-				newPointList.push(arr[indexOfMax].xy)
+				newPointList.push(item.xy)
 
-				const indexRelative = currentPoint.relative.indexOf('top')
-				currentPoint.relative.splice(indexRelative, 1)
-
-				currentPoint = arr[indexOfMax]
-				const indexNewRelative =
-					currentPoint.relative.indexOf('bottom')
-				currentPoint.relative.splice(indexNewRelative, 1)
+				currentPoint.relative.top = false
+				currentPoint = item
+				currentPoint.relative.bottom = false
 			}
-		}
-		newPointList[0] = [
-			newPointList[0][0] + 14,
-			newPointList[0][1],
-		]
+		})
+		newPointList[0] = [newPointList[0][0] + 14, newPointList[0][1]]
 		newPointList[newPointList.length - 1] = [
 			newPointList[newPointList.length - 1][0],
 			newPointList[newPointList.length - 1][1] + 10,
@@ -306,60 +287,73 @@ function App() {
 
 	return (
 		<div className='app'>
-			<div className='wrapper'>
-				<div className='sudoku_grid_wrapper'>
-					<div className='sudoku_grid'>
-						{splitNumbers.map((largeCell, i_largeCell) => (
-							<div
-								key={i_largeCell}
-								className='sudoku_grid_largeCell'
-							>
-								{largeCell.map((smallCell, i_smallCell) => (
-									<div
-										key={i_smallCell}
-										className='sudoku_grid_smallCell'
-									>
-										{smallCell !== '-' && smallCell}
-									</div>
-								))}
-							</div>
-						))}
-					</div>
-					<div className='sudoku_grid_areas'>
-						{areas.map(area => {
-							const arrayPoints = getPointsWithSequence(
-								getPointsWithRelative(area.cells)
-							)
-							const stringPoints = arrayPoints.join(' ')
-							return (
+			<div className='sudoku'>
+				<div className='sudoku_header'>
+					<span className='sudoku_level'>Лёгкий</span>
+					<span className='sudoku_time'>
+						<p>04:53</p>
+						<span className='sudoku_stop'></span>
+					</span>
+				</div>
+				<div className='sudoku_wrapper'>
+					<div className='sudoku_paper'>
+						<div className='sudoku_grid'>
+							{splitNumbers.map((largeCell, i_largeCell) => (
 								<div
-									key={stringPoints}
-									className='sudoku_grid_singleArea'
+									key={i_largeCell}
+									className='sudoku_grid_largeCell'
 								>
-									<svg viewBox='0 0 380 380'>
-										<polyline
-											points={stringPoints}
-											fill='none'
-											stroke='var(--light-1)'
-											strokeWidth='1'
-											strokeLinecap='square'
-											strokeLinejoin='miter'
-											//strokeDasharray='4 6'
-											strokeDashoffset='0'
-										/>
-									</svg>
-									<span
-										className='sudoku_grid_singleArea_sum'
-										style={{
-											top: `${arrayPoints[0][1] - 2}px`,
-											left: `${arrayPoints[0][0] - 16}px`,
-										}}
-									>
-										{area.sum}
-									</span>
+									{largeCell.map((smallCell, i_smallCell) => (
+										<div
+											key={i_smallCell}
+											className='sudoku_grid_smallCell'
+										>
+											{smallCell !== '-' && smallCell}
+										</div>
+									))}
 								</div>
-							)
-						})}
+							))}
+						</div>
+						<div className='sudoku_grid_areas'>
+							{areas.map(area => {
+								const arrayPoints = getPointsWithSequence(
+									getPointsWithRelative(area.cells)
+								)
+								const stringPoints = arrayPoints.join(' ')
+								return (
+									<div
+										key={stringPoints}
+										className='sudoku_grid_singleArea'
+									>
+										<svg viewBox='0 0 380 380'>
+											<polyline
+												points={stringPoints}
+												fill='none'
+												stroke='var(--light-1)'
+												strokeWidth='1'
+												strokeLinecap='square'
+												strokeLinejoin='miter'
+												//strokeDasharray='4 6'
+												strokeDashoffset='0'
+											/>
+										</svg>
+										<span
+											className='sudoku_grid_singleArea_sum'
+											style={{
+												top: `${
+													arrayPoints[0][1] - 2
+												}px`,
+												left: `${
+													arrayPoints[0][0] - 16
+												}px`,
+											}}
+										>
+											{area.sum}
+										</span>
+									</div>
+								)
+							})}
+						</div>
 					</div>
 				</div>
 			</div>
