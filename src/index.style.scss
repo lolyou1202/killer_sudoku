@@ -1,21 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:wght@300..900&display=swap');
 
 :root {
-	--dark-1: #010101;
-	--dark-2: #16161e;
+	--black: #1f1f2b;
 
-	--gray-1: #1f2130;
-	--gray-2: #232534;
-	--gray-3: #2a2f42;
+	--dark-1: #232534;
 
-	--light-1: #838290;
-	--light-2: #b1b4d9;
-
-	--blue-1: #232e6c;
-	--blue-2: #1b4196;
-	--blue-3: #7284fe;
+	--light-1: #E2E3E8;
+	--light-2: #B1B8DF;
 }
 
+body {
+	overflow: hidden;
+	background: var(--black);
+}
 
 /* Reset and base styles  */
 * {

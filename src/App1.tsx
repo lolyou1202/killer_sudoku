@@ -6,10 +6,11 @@ import { useArrayIncludes } from './hooks/useArrayIncludes'
 import { useFindPixelsByCoordinates } from './hooks/useFindPixelsByCoordinates'
 import { useFindPointInDirection } from './hooks/useFindPointInDirection'
 import { useSplitToSections } from './hooks/useSplitToSections'
-import { generateKillerSudoku } from 'killer-sudoku-generator'
+import { generateKillerSudoku, overrideNumberOfCellsToRemove } from 'killer-sudoku-generator'
 
 function App1() {
-	const sudoku = generateKillerSudoku('medium')
+	overrideNumberOfCellsToRemove("expert", 65)
+	const sudoku = generateKillerSudoku('expert')
 
 	const { puzzle, solution, areas, difficulty } = sudoku
 	console.log(sudoku)
