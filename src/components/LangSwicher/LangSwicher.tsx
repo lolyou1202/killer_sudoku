@@ -15,9 +15,10 @@ export const LangSwicher = () => {
 			currentValue={currentLang}
 			menuList={LANG_LIST.map(lang => ({ label: lang, value: lang }))}
 			onClickMenuItem={onClickMenuItem}
-			classNameMenuTarget='langSwicher-target'
-			classNameMenuDropdown='langSwicher-dropdown'
-			classNameMenuItem='langSwicher-menuItem'
+			classNameMenuTarget='langSwicher_target'
+			classNameMenuDropdown='langSwicher_dropdown'
+			classNameMenuItem='langSwicher_menuItem'
+			classNameMenuItemLabel='langSwicher_menuItem_label'
 		/>
 	)
 }

@@ -11,6 +11,8 @@ export const Menu = ({
 	classNameMenuTarget,
 	classNameMenuDropdown,
 	classNameMenuItem,
+	classNameMenuItemLabel,
+	classNameMenuItemIcon,
 }: {
 	targetComponent: ReactNode
 	currentValue: string
@@ -23,6 +25,8 @@ export const Menu = ({
 	classNameMenuTarget?: string
 	classNameMenuDropdown?: string
 	classNameMenuItem?: string
+	classNameMenuItemLabel?: string
+	classNameMenuItemIcon?: string
 }) => {
 	const [opened, setOpened] = useState(false)
 
@@ -39,6 +43,11 @@ export const Menu = ({
 		'menu_dropdown',
 		classNameMenuDropdown
 	)
+	const CN_menuItemLabel = classNames(
+		'menu_item_label',
+		classNameMenuItemLabel
+	)
+	const CN_menuItemIcon = classNames('menu_item_icon', classNameMenuItemIcon)
 
 	return (
 		<Popover
@@ -61,7 +70,7 @@ export const Menu = ({
 						'menu_item',
 						classNameMenuItem,
 						{
-							active: menuItem.label === currentValue,
+							active: menuItem.value === currentValue,
 						}
 					)
 					return (
@@ -70,10 +79,16 @@ export const Menu = ({
 							className={CN_menuItem}
 							onClick={() => handlerClickMenuItem(menuItem.value)}
 						>
-							{menuItem.icon}
-							<span className='menu_item_label'>
-								{menuItem.label}
-							</span>
+							{menuItem.icon && (
+								<span className={CN_menuItemIcon}>
+									{menuItem.icon}
+								</span>
+							)}
+							{menuItem.label && (
+								<span className={CN_menuItemLabel}>
+									{menuItem.label}
+								</span>
+							)}
 						</div>
 					)
 				})}

@@ -14,17 +14,12 @@ export const ThemeSwicher = () => {
 			className='themeSwitcher'
 			onClick={onClickMenuItem}
 		>
-			{currentTheme === 'dark' ? (
-				<SVG
-					src='../../../icons/moon.svg'
-					width={32}
-				/>
-			) : currentTheme === 'light' && (
-				<SVG
-					src='../../../icons/sun.svg'
-					width={32}
-				/>
-			)}
+			<SVG
+				src={`../../../icons/${
+					currentTheme === 'dark' ? 'moon' : 'sun'
+				}.svg`}
+				width={32}
+			/>
 		</button>
 	)
 }

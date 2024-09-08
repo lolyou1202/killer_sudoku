@@ -11,17 +11,3 @@
 		fill: var(--light-2);
 	}
 }
-
-.menu {
-	display: flex;
-	svg {
-		fill: var(--light-2);
-		cursor: pointer;
-		transition: fill 0.2s ease-in-out;
-	}
-	&:hover {
-		svg {
-			fill: var(--light-1);
-		}
-	}
-}

@@ -1,8 +1,8 @@
-import './Header.style.scss'
 import { Logo } from '../Logo/Logo'
-import SVG from 'react-inlinesvg'
 import { LangSwicher } from '../LangSwicher/LangSwicher'
 import { ThemeSwicher } from '../ThemeSwicher/ThemeSwicher'
+import { Navigation } from '../Navigation/Navigation'
+import './Header.style.scss'
 
 export const Header = () => {
 	return (
@@ -11,12 +11,7 @@ export const Header = () => {
 			<div className='header-panel'>
 				<LangSwicher />
 				<ThemeSwicher />
-				<div className='menu'>
-					<SVG
-						src='../../../icons/menu.svg'
-						width={32}
-					/>
-				</div>
+				<Navigation />
 			</div>
 		</div>
 	)
