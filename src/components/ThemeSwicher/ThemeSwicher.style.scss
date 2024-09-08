@@ -1,0 +1,13 @@
+.themeSwitcher {
+	display: flex;
+	cursor: pointer;
+	svg {
+		fill: var(--light-2);
+		transition: fill 0.2s ease-in-out;
+	}
+	&:hover {
+		svg {
+			fill: var(--light-1);
+		}
+	}
+}

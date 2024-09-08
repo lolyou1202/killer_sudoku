@@ -1,25 +1,23 @@
-import { Menu } from '@mantine/core'
 import { useState } from 'react'
+import { DEFAULT_LANG, LANG_LIST } from '../../settings/settings'
+import { Menu } from '../Menu/Menu'
 import './LangSwicher.style.scss'
 
 export const LangSwicher = () => {
-	const [opened, setOpened] = useState(false)
+	const [currentLang, setCurrentLang] = useState(DEFAULT_LANG)
+
+	const onClickMenuItem = (menuItemValue: string) =>
+		setCurrentLang(menuItemValue)
 
 	return (
 		<Menu
-			opened={opened}
-			onChange={setOpened}
-			position='bottom-end'
-			offset={16}
-			trigger='click'
-		>
-			<Menu.Target>
-				<span className='langSwicher-current'>RU</span>
-			</Menu.Target>
-			<Menu.Dropdown>
-				<Menu.Item>Mantine website</Menu.Item>
-				<Menu.Item>External link</Menu.Item>
-			</Menu.Dropdown>
-		</Menu>
+			targetComponent={currentLang}
+			currentValue={currentLang}
+			menuList={LANG_LIST.map(lang => ({ label: lang, value: lang }))}
+			onClickMenuItem={onClickMenuItem}
+			classNameMenuTarget='langSwicher-target'
+			classNameMenuDropdown='langSwicher-dropdown'
+			classNameMenuItem='langSwicher-menuItem'
+		/>
 	)
 }

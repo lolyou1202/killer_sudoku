@@ -1,24 +1,21 @@
-.mantine-Menu-dropdown {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	padding: 16px;
-	background: var(--dark-1);
-	border-radius: 16px;
-	box-shadow: 0 0 12px 4px #16161e;
-}
-
 .langSwicher {
-	&-current {
+	&-target {
 		font-weight: 600;
 		font-size: 24px;
 		line-height: 32px;
 		color: var(--light-2);
+		text-transform: uppercase;
 		cursor: pointer;
 		transition: color 0.2s ease-in-out;
 		&:hover {
 			color: var(--light-1);
 		}
+	}
+	&-dropdown {
+		gap: 8px;
+		padding: 8px;
+	}
+	&-menuItem {
+		padding: 8px;
 	}
 }

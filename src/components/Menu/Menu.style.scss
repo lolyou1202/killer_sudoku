@@ -1,0 +1,44 @@
+.menu {
+	&_dropdown {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding: 16px;
+		background: var(--dark-1);
+		border-radius: 16px;
+		box-shadow: 0 0 12px 4px #16161e;
+	}
+	&_item {
+		display: flex;
+		justify-content: center;
+		width: 80px;
+		padding: 16px;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: background 0.2s ease-in-out;
+		&:hover {
+			background: var(--gray-1);
+		}
+		&.active {
+			background: var(--primary-1);
+			.menu_item_label {
+				color: var(--light-1);
+			}
+			svg {
+				fill: var(--light-1);
+			}
+		}
+		svg {
+			fill: var(--light-2);
+		}
+		&_label {
+			font-weight: 600;
+			font-size: 24px;
+			line-height: 32px;
+			color: var(--light-2);
+			text-transform: uppercase;
+			transition: color 0.2s ease-in-out;
+		}
+	}
+}
