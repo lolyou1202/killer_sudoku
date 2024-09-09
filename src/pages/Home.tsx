@@ -1,3 +1,5 @@
+import { DefaultButton } from "../components/DefaultButton/DefaultButton"
+
 export const Home = () => {
-	return <div>Home</div>
+	return <DefaultButton color="colorGradient" />
 }

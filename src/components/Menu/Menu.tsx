@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { Popover } from '@mantine/core'
 import classNames from 'classnames'
 import './Menu.style.scss'
@@ -14,10 +14,10 @@ export const Menu = ({
 	classNameMenuItemLabel,
 	classNameMenuItemIcon,
 }: {
-	targetComponent: ReactNode
+	targetComponent: React.ReactNode
 	currentValue: string
 	menuList: {
-		icon?: ReactNode
+		icon?: React.ReactNode
 		label?: string
 		value: string
 	}[]

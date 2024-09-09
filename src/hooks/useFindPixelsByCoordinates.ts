@@ -3,7 +3,7 @@ import {
 	INDENT_BETWEEN_CELLS,
 	INDENT_BETWEEN_SECTION_CELLS,
 	SIZE_CELL,
-} from '../constants'
+} from '../settings/constants'
 
 export const useFindPixelsByCoordinates = (coordinate: number) => {
 	return (

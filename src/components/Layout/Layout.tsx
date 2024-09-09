@@ -1,8 +1,7 @@
-import { ReactNode } from 'react'
 import { Header } from '../Header/Header'
 import './Layout.style.scss'
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div className='layout'>
 			<Header />

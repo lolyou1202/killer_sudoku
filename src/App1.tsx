@@ -1,15 +1,18 @@
 import {
 	AREA_INDENT_INSIDE_CELL_BOTTOMSIDE,
 	AREA_INDENT_INSIDE_CELL_TOPSIDE,
-} from './constants'
+} from './settings/constants'
 import { useArrayIncludes } from './hooks/useArrayIncludes'
 import { useFindPixelsByCoordinates } from './hooks/useFindPixelsByCoordinates'
 import { useFindPointInDirection } from './hooks/useFindPointInDirection'
 import { useSplitToSections } from './hooks/useSplitToSections'
-import { generateKillerSudoku, overrideNumberOfCellsToRemove } from 'killer-sudoku-generator'
+import {
+	generateKillerSudoku,
+	overrideNumberOfCellsToRemove,
+} from 'killer-sudoku-generator'
 
 function App1() {
-	overrideNumberOfCellsToRemove("expert", 65)
+	overrideNumberOfCellsToRemove('expert', 65)
 	const sudoku = generateKillerSudoku('expert')
 
 	const { puzzle, solution, areas, difficulty } = sudoku

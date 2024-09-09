@@ -1,0 +1,105 @@
+.defaultButton {
+	display: flex;
+	align-items: center;
+	border-radius: 8px;
+	width: 400px;
+	height: 80px;
+	&.single {
+		justify-content: center;
+	}
+	&.multiTier {
+		justify-content: center;
+	}
+	&.multiTierWithIcons {
+		justify-content: space-between;
+	}
+	&.colorDefault {
+		background: var(--gray-2);
+		transition: background 0.2s ease-in-out;
+		.defaultButton_icon {
+			svg {
+				fill: var(--light-2);
+			}
+		}
+		.defaultButton_label {
+			color: var(--light-2);
+		}
+		.defaultButton_subLablel {
+			color: var(--light-3);
+		}
+		&:hover {
+			background: var(--gray-1);
+			.defaultButton_icon {
+				svg {
+					fill: var(--light-1);
+				}
+			}
+			.defaultButton_label {
+				color: var(--light-1);
+			}
+			.defaultButton_subLablel {
+				color: var(--light-2);
+			}
+		}
+	}
+	&.colorPrimary {
+		background: var(--primary-1);
+		transition: background 0.2s ease-in-out;
+		.defaultButton_icon {
+			svg {
+				fill: var(--light-1);
+			}
+		}
+		.defaultButton_label {
+			color: var(--light-1);
+		}
+		.defaultButton_subLablel {
+			color: var(--light-2);
+		}
+		&:hover {
+			background: var(--primary-2);
+		}
+	}
+	&.colorGradient {
+		background: var(--primary-1);
+		transition: background 0.2s ease-in-out;
+		.defaultButton_icon {
+			svg {
+				fill: var(--light-1);
+			}
+		}
+		.defaultButton_label {
+			color: var(--light-1);
+		}
+		.defaultButton_subLablel {
+			color: var(--light-2);
+		}
+		&:hover {
+			background: var(--primary-2);
+		}
+	}
+	&_icon {
+		svg {
+			display: flex;
+			transition: fill 0.2s ease-in-out;
+		}
+	}
+	&_labelMultiTier {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+	&_label {
+		font-weight: 600;
+		font-size: 24px;
+		line-height: 24px;
+		transition: color 0.2s ease-in-out;
+	}
+	&_subLablel {
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 16px;
+		transition: color 0.2s ease-in-out;
+	}
+}
