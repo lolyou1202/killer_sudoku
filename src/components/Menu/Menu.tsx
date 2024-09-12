@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import { Popover } from '@mantine/core'
 import classNames from 'classnames'
 import './Menu.style.scss'
+import { BasicButton } from '../BasicButton/BasicButton'
 
 export const Menu = ({
 	targetComponent,
@@ -57,12 +58,14 @@ export const Menu = ({
 			offset={16}
 		>
 			<Popover.Target>
-				<button
+				{/*<BasicButtonWithRef
+					colorVariant='noBackground'
 					className={CN_menuTarget}
 					onClick={handlerClickTarget}
 				>
 					{targetComponent}
-				</button>
+				</BasicButtonWithRef>*/}
+				{targetComponent}
 			</Popover.Target>
 			<Popover.Dropdown className={CN_menuDropdown}>
 				{menuList.map((menuItem, index) => {
@@ -96,3 +99,16 @@ export const Menu = ({
 		</Popover>
 	)
 }
+
+//const BasicButtonWithRef = forwardRef<HTMLButtonElement>(
+//	(props, ref, children) => {
+//		return (
+//			<BasicButton
+//				ref={ref}
+//				{...props}
+//			>
+//				{children}
+//			</BasicButton>
+//		)
+//	}
+//)

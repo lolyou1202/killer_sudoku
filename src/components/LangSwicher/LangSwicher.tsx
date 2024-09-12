@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { DEFAULT_LANG, LANG_LIST } from '../../settings/settings'
 import { Menu } from '../Menu/Menu'
 import './LangSwicher.style.scss'
+import { BasicButton } from '../BasicButton/BasicButton'
 
 export const LangSwicher = () => {
 	const [currentLang, setCurrentLang] = useState(DEFAULT_LANG)
@@ -11,7 +12,7 @@ export const LangSwicher = () => {
 
 	return (
 		<Menu
-			targetComponent={currentLang}
+			targetComponent={<BasicButton.Label label={currentLang} />}
 			currentValue={currentLang}
 			menuList={LANG_LIST.map(lang => ({ label: lang, value: lang }))}
 			onClickMenuItem={onClickMenuItem}
