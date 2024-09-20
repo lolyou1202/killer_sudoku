@@ -1,25 +1,23 @@
-import { useState } from 'react'
 import { DEFAULT_THEME } from '../../settings/settings'
-import SVG from 'react-inlinesvg'
+import { useState } from 'react'
+import { BasicButton, BasicButtonIcon } from '../BasicButton/BasicButton'
 import './ThemeSwicher.style.scss'
 
 export const ThemeSwicher = () => {
 	const [currentTheme, setCurrentTheme] = useState(DEFAULT_THEME)
 
-	const onClickMenuItem = () =>
+	const onClickSwicher = () =>
 		setCurrentTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
 
 	return (
-		<button
+		<BasicButton
+			colorVariant='noBackground'
 			className='themeSwitcher'
-			onClick={onClickMenuItem}
+			onClick={onClickSwicher}
 		>
-			<SVG
-				src={`../../../icons/${
-					currentTheme === 'dark' ? 'moon' : 'sun'
-				}.svg`}
-				width={32}
+			<BasicButtonIcon
+				iconName={currentTheme === 'dark' ? 'moon' : 'sun'}
 			/>
-		</button>
+		</BasicButton>
 	)
 }

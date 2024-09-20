@@ -1,86 +1,73 @@
+import {
+	BasicButton,
+	BasicButtonIcon,
+	BasicButtonLabel,
+	BasicButtonProps,
+} from '../BasicButton/BasicButton'
 import classNames from 'classnames'
-import SVG from 'react-inlinesvg'
 import './DefaultButton.style.scss'
+
+interface DefaultButtonProps extends Omit<BasicButtonProps, 'children'> {
+	variant?: 'single' | 'multiTier' | 'multiTierWithChevron'
+	iconName?: string
+	labelSingle?: string
+	labelMultiTier?: { label: string; subLablel: string }
+}
 
 export const DefaultButton = ({
 	variant = 'single',
-	color = 'colorDefault',
+	colorVariant = 'default',
 	iconName,
 	labelSingle,
 	labelMultiTier,
 	disabled,
-}: {
-	variant?: 'single' | 'multiTier' | 'multiTierWithChevron'
-	color?: 'colorDefault' | 'colorPrimary' | 'colorGradient'
-	iconName?: React.ReactNode
-	labelSingle?: string
-	labelMultiTier?: { label: string; subLablel: string }
-	disabled?: boolean
-}) => {
-	const CN_defaultButton = classNames('defaultButton', variant, color)
+	className,
+	onClick,
+}: DefaultButtonProps) => {
+	const CN_defaultButton = classNames('defaultButton', variant, className)
 	return (
-		<button
+		<BasicButton
 			className={CN_defaultButton}
+			colorVariant={colorVariant}
 			disabled={disabled}
+			onClick={onClick}
 		>
 			{variant === 'single' && (
 				<>
-					{iconName && (
-						<span className='defaultButton_icon'>
-							<SVG
-								src={`../../../icons/${iconName}.svg`}
-								width={32}
-							/>
-						</span>
-					)}
+					{iconName && <BasicButtonIcon iconName={iconName} />}
 					{labelSingle && (
-						<label className='defaultButton_label'>
-							{labelSingle}
-						</label>
+						<BasicButtonLabel
+							tier={'singleTier'}
+							label={labelSingle}
+						/>
 					)}
 				</>
 			)}
 			{variant === 'multiTier' && labelMultiTier && (
-				<span className='defaultButton_labelMultiTier'>
-					<label className='defaultButton_label'>
-						{labelMultiTier.label}
-					</label>
-					<p className='defaultButton_subLablel'>
-						{labelMultiTier.subLablel}
-					</p>
-				</span>
+				<BasicButtonLabel
+					tier='multiTier'
+					label={labelMultiTier.label}
+					subLabel={labelMultiTier.subLablel}
+				/>
 			)}
 			{variant === 'multiTierWithChevron' &&
 				(iconName || labelMultiTier) && (
 					<>
 						<div className='defaultButton_multiTier_wrapper'>
 							{iconName && (
-								<span className='defaultButton_icon'>
-									<SVG
-										src={`../../../icons/${iconName}.svg`}
-										width={32}
-									/>
-								</span>
+								<BasicButtonIcon iconName={iconName} />
 							)}
 							{labelMultiTier && (
-								<span className='defaultButton_labelMultiTier'>
-									<label className='defaultButton_label'>
-										{labelMultiTier.label}
-									</label>
-									<p className='defaultButton_subLablel'>
-										{labelMultiTier.subLablel}
-									</p>
-								</span>
+								<BasicButtonLabel
+									tier='multiTier'
+									label={labelMultiTier.label}
+									subLabel={labelMultiTier.subLablel}
+								/>
 							)}
 						</div>
-						<span className='defaultButton_icon'>
-							<SVG
-								src='../../../icons/chevron_right.svg'
-								width={32}
-							/>
-						</span>
+						<BasicButtonIcon iconName='chevron_right' />
 					</>
 				)}
-		</button>
+		</BasicButton>
 	)
 }

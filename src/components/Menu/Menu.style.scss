@@ -3,55 +3,17 @@
 		position: absolute;
 		display: flex;
 		flex-direction: column;
-		gap: 16px;
-		padding: 16px;
+		gap: 8px;
+		padding: 8px;
 		background: var(--dark);
 		border-radius: 16px;
 		box-shadow: 0 0 12px 4px #16161e;
 	}
 	&_item {
 		display: flex;
+		align-items: center;
 		justify-content: flex-start;
-		gap: 32px;
+		gap: 16px;
 		padding: 16px;
-		border-radius: 8px;
-		cursor: pointer;
-		transition: background 0.2s ease-in-out;
-		&:hover {
-			background: var(--gray-1);
-			.menu_item_label {
-				color: var(--light-1);
-			}
-			.menu_item_icon {
-				svg {
-					fill: var(--light-1);
-				}
-			}
-		}
-		&.active {
-			background: var(--primary-1);
-			.menu_item_label {
-				color: var(--light-1);
-			}
-			.menu_item_icon {
-				svg {
-					fill: var(--light-1);
-				}
-			}
-		}
-		&_icon {
-			svg {
-				display: flex;
-				fill: var(--light-2);
-				transition: fill 0.2s ease-in-out;
-			}
-		}
-		&_label {
-			font-weight: 600;
-			font-size: 24px;
-			line-height: 32px;
-			color: var(--light-2);
-			transition: color 0.2s ease-in-out;
-		}
 	}
 }

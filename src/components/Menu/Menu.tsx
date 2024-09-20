@@ -1,8 +1,12 @@
-import { forwardRef, useState } from 'react'
+import { useState } from 'react'
 import { Popover } from '@mantine/core'
 import classNames from 'classnames'
+import {
+	BasicButton,
+	BasicButtonIcon,
+	BasicButtonLabel,
+} from '../BasicButton/BasicButton'
 import './Menu.style.scss'
-import { BasicButton } from '../BasicButton/BasicButton'
 
 export const Menu = ({
 	targetComponent,
@@ -12,13 +16,11 @@ export const Menu = ({
 	classNameMenuTarget,
 	classNameMenuDropdown,
 	classNameMenuItem,
-	classNameMenuItemLabel,
-	classNameMenuItemIcon,
 }: {
 	targetComponent: React.ReactNode
 	currentValue: string
 	menuList: {
-		icon?: React.ReactNode
+		iconName?: string
 		label?: string
 		value: string
 	}[]
@@ -26,8 +28,6 @@ export const Menu = ({
 	classNameMenuTarget?: string
 	classNameMenuDropdown?: string
 	classNameMenuItem?: string
-	classNameMenuItemLabel?: string
-	classNameMenuItemIcon?: string
 }) => {
 	const [opened, setOpened] = useState(false)
 
@@ -39,16 +39,7 @@ export const Menu = ({
 	const handlerClickTarget = () => setOpened(opened => !opened)
 
 	const CN_menuTarget = classNames('menu_target', classNameMenuTarget)
-	const CN_menuDropdown = classNames(
-		'dropdown',
-		'menu_dropdown',
-		classNameMenuDropdown
-	)
-	const CN_menuItemLabel = classNames(
-		'menu_item_label',
-		classNameMenuItemLabel
-	)
-	const CN_menuItemIcon = classNames('menu_item_icon', classNameMenuItemIcon)
+	const CN_menuDropdown = classNames('menu_dropdown', classNameMenuDropdown)
 
 	return (
 		<Popover
@@ -58,57 +49,40 @@ export const Menu = ({
 			offset={16}
 		>
 			<Popover.Target>
-				{/*<BasicButtonWithRef
+				<BasicButton
 					colorVariant='noBackground'
 					className={CN_menuTarget}
 					onClick={handlerClickTarget}
 				>
 					{targetComponent}
-				</BasicButtonWithRef>*/}
-				{targetComponent}
+				</BasicButton>
 			</Popover.Target>
 			<Popover.Dropdown className={CN_menuDropdown}>
 				{menuList.map((menuItem, index) => {
+					const { value, iconName, label } = menuItem
 					const CN_menuItem = classNames(
 						'menu_item',
-						classNameMenuItem,
-						{
-							active: menuItem.value === currentValue,
-						}
+						classNameMenuItem
 					)
+					const isActiveMenuItem =
+						menuItem.value === currentValue
+							? 'selectedPrimary'
+							: 'noBackgroundToBackground'
 					return (
-						<div
+						<BasicButton
 							key={index}
+							colorVariant={isActiveMenuItem}
 							className={CN_menuItem}
-							onClick={() => handlerClickMenuItem(menuItem.value)}
+							onClick={() => handlerClickMenuItem(value)}
 						>
-							{menuItem.icon && (
-								<span className={CN_menuItemIcon}>
-									{menuItem.icon}
-								</span>
+							{iconName && (
+								<BasicButtonIcon iconName={iconName} />
 							)}
-							{menuItem.label && (
-								<span className={CN_menuItemLabel}>
-									{menuItem.label}
-								</span>
-							)}
-						</div>
+							{label && <BasicButtonLabel label={label} />}
+						</BasicButton>
 					)
 				})}
 			</Popover.Dropdown>
 		</Popover>
 	)
 }
-
-//const BasicButtonWithRef = forwardRef<HTMLButtonElement>(
-//	(props, ref, children) => {
-//		return (
-//			<BasicButton
-//				ref={ref}
-//				{...props}
-//			>
-//				{children}
-//			</BasicButton>
-//		)
-//	}
-//)

@@ -1,0 +1,109 @@
+.sudokuPanel {
+	display: flex;
+	gap: 24px;
+	width: 100%;
+	height: 608px;
+	padding: 24px;
+	background: var(--dark);
+}
+.sudoku {
+	&_wrapper {
+		position: relative;
+		background: var(--black);
+	}
+	&_grid {
+		display: grid;
+		grid-template-columns: repeat(
+			var(--COUNT_CELLS_INSIDE_SECTION),
+			calc(
+				var(--SIZE_CELL) * var(--COUNT_CELLS_INSIDE_SECTION) +
+					var(--INDENT_BETWEEN_CELLS) * 2
+			)
+		);
+		grid-template-rows: repeat(
+			var(--COUNT_CELLS_INSIDE_SECTION),
+			calc(
+				var(--SIZE_CELL) * var(--COUNT_CELLS_INSIDE_SECTION) +
+					var(--INDENT_BETWEEN_CELLS) * 2
+			)
+		);
+		gap: var(--INDENT_BETWEEN_SECTION_CELLS);
+		padding: var(--INDENT_BETWEEN_SECTION_CELLS);
+		&_largeCell {
+			display: grid;
+			grid-template-columns: repeat(
+				var(--COUNT_CELLS_INSIDE_SECTION),
+				var(--SIZE_CELL)
+			);
+			grid-template-rows: repeat(
+				var(--COUNT_CELLS_INSIDE_SECTION),
+				var(--SIZE_CELL)
+			);
+			gap: var(--INDENT_BETWEEN_CELLS);
+		}
+		&_smallCell {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--gray-2);
+			font-size: 28px;
+			line-height: 28px;
+			color: var(--light-2);
+			user-select: none;
+			cursor: pointer;
+		}
+	}
+	&_funcSide {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		width: 100%;
+	}
+	&_header {
+		display: flex;
+		justify-content: space-between;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 24px;
+		color: var(--light-2);
+	}
+	&_timer {
+		display: flex;
+		gap: 8px;
+		&_icon {
+			svg {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+	&_func {
+		display: flex;
+		justify-content: space-between;
+		&_button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 64px;
+			height: 64px;
+			&.withMark {
+				
+			}
+			&.lamp {
+				svg {
+					fill: var(--yellow-1) !important;
+				}
+			}
+		}
+	}
+	&_keyboard {
+		display: grid;
+		grid-template-columns: repeat(3, 100px);
+		grid-template-rows: repeat(3, 100px);
+		gap: 8px;
+		&_num {
+			width: 100px;
+			height: 100px;
+		}
+	}
+}

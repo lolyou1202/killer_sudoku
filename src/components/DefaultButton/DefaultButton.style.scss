@@ -13,135 +13,24 @@
 	}
 	&.multiTierWithChevron {
 		justify-content: space-between;
-		
-		.defaultButton_labelMultiTier {
+		.basicButton_labelMultiTier {
 			align-items: flex-start;
 		}
-	}
-	&.colorDefault {
-		background: var(--gray-2);
-		transition: background 0.2s ease-in-out;
-		.defaultButton_icon {
-			svg {
-				fill: var(--light-2);
-			}
-		}
-		.defaultButton_label {
-			color: var(--light-2);
-		}
-		.defaultButton_subLablel {
-			color: var(--light-3);
-		}
-		&:hover {
-			background: var(--gray-1);
-			.defaultButton_icon {
-				svg {
-					fill: var(--light-1);
-				}
-			}
-			.defaultButton_label {
-				color: var(--light-1);
-			}
-			.defaultButton_subLablel {
-				color: var(--light-2);
-			}
-		}
-	}
-	&.colorPrimary {
-		background: var(--primary-1);
-		transition: background 0.2s ease-in-out;
-		.defaultButton_icon {
-			svg {
-				fill: var(--light-1);
-			}
-		}
-		.defaultButton_label {
-			color: var(--light-1);
-		}
-		.defaultButton_subLablel {
-			color: var(--light-2);
-		}
-		&:hover {
-			background: var(--primary-2);
-		}
-	}
-	&.colorGradient {
-		position: relative;
-		background: linear-gradient(
-			180deg,
-			var(--primary-1) 0%,
-			var(--primary-3) 100%
-		);
-		transition: background 0.2s ease-in-out;
-		.defaultButton_icon {
-			position: relative;
-			z-index: 2;
-			svg {
-				fill: var(--light-1);
-			}
-		}
-		.defaultButton_label {
-			color: var(--light-1);
-			z-index: 2;
-		}
-		.defaultButton_subLablel {
-			color: var(--light-2);
-			z-index: 2;
-		}
-		&:hover {
-			&::after {
-				opacity: 1;
-			}
-		}
-		&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			z-index: 1;
-			background: linear-gradient(
-				180deg,
-				var(--primary-2) 0%,
-				var(--primary-4) 100%
-			);
-			border-radius: 8px;
-			opacity: 0;
-			transition: opacity 0.2s ease-in-out;
-		}
-	}
-	&:disabled {
-		opacity: .7;
-		pointer-events: none;
 	}
 	&_multiTier_wrapper {
 		display: flex;
 		align-items: center;
 		gap: 24px;
 	}
-	&_icon {
-		svg {
-			display: flex;
-			transition: fill 0.2s ease-in-out;
+}
+
+@media (max-width: 967px) {
+	.defaultButton {
+		gap: 20px;
+		height: 64px;
+		padding: 0 20px;
+		&_multiTier_wrapper {
+			gap: 20px;
 		}
-	}
-	&_labelMultiTier {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 8px;
-	}
-	&_label {
-		font-weight: 600;
-		font-size: 24px;
-		line-height: 24px;
-		transition: color 0.2s ease-in-out;
-	}
-	&_subLablel {
-		font-weight: 500;
-		font-size: 16px;
-		line-height: 16px;
-		transition: color 0.2s ease-in-out;
 	}
 }

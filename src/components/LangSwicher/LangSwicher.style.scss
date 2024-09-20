@@ -1,9 +1,5 @@
 .langSwicher {
 	&_target {
-		font-weight: 600;
-		font-size: 24px;
-		line-height: 32px;
-		color: var(--light-2);
 		text-transform: uppercase;
 	}
 	&_dropdown {
@@ -12,10 +8,8 @@
 	}
 	&_menuItem {
 		width: 80px;
-		padding: 8px;
+		padding: 16px;
 		justify-content: center;
-		&_label {
-			text-transform: uppercase;
-		}
+		text-transform: uppercase;
 	}
 }

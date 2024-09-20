@@ -1,0 +1,43 @@
+.home {
+	display: flex;
+	align-items: center;
+	width: 500px;
+	height: 100%;
+	margin: 0 auto;
+	&_layout {
+		display: flex;
+		flex-direction: column;
+		gap: 100px;
+		width: 100%;
+		& > div {
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+			& > span {
+				display: flex;
+				gap: 24px;
+				& > :first-child {
+					width: 100%;
+				}
+				& > :nth-child(2) {
+					flex-shrink: 0;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 967px) {
+	.home {
+		width: 400px;
+		&_layout {
+			gap: 64px;
+			& > div {
+				gap: 20px;
+				& > span {
+					gap: 20px;
+				}
+			}
+		}
+	}
+}

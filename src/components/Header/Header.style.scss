@@ -5,9 +5,13 @@
 		display: flex;
 		gap: 24px;
 	}
-	svg {
-		width: 32px;
-		height: 32px;
-		fill: var(--light-2);
+}
+
+@media (max-width: 967px) {
+	.header {
+		&-panel {
+			display: flex;
+			gap: 20px;
+		}
 	}
 }

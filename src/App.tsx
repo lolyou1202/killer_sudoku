@@ -2,14 +2,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Gameplay } from './pages/Gameplay'
 import { Challenge } from './pages/Challenge'
-import { Layout } from './components/Layout/Layout'
+import { AppLayout } from './components/Layout/AppLayout/AppLayout'
 import { MantineProvider } from '@mantine/core'
 
 export default function App() {
 	return (
 		<MantineProvider>
 			<BrowserRouter>
-				<Layout>
+				<AppLayout>
 					<Routes>
 						<Route
 							path='/'
@@ -24,7 +24,7 @@ export default function App() {
 							element={<Gameplay />}
 						/>
 					</Routes>
-				</Layout>
+				</AppLayout>
 			</BrowserRouter>
 		</MantineProvider>
 	)

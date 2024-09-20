@@ -1,3 +1,5 @@
+import { GameplayLayout } from '../components/Layout/GameplayLayout/GameplayLayout'
+
 export const Gameplay = () => {
-	return <div>Gameplay</div>
+	return <GameplayLayout />
 }
